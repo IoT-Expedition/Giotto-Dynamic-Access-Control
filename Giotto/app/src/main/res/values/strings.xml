@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Giotto</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="credentials_string">Credentials Required</string>
+    <string name="title_activity_sensor">sensor</string>
+    <string name="title_activity_devices">Devices</string>
+    <string name="location_string">Select a Location</string>
+    <string name="user_name_string">User</string>
+    <string name="name">Name</string>
+    <string name="pwd">Password</string>
+    <string name="Enter">Enter</string>
+    <string name="toggleButton">On/Off</string>
+    <string name="title_activity_check">Check</string>
+
+</resources>
