@@ -18,6 +18,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
@@ -75,6 +76,8 @@ public class ServiceHandler {
             schemeRegistry.register(new Scheme("https",
                     SSLSocketFactory.getSocketFactory(), 443));
 
+            schemeRegistry.register( new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+
             HttpParams paramss = new BasicHttpParams();
 
             SingleClientConnManager mgr = new SingleClientConnManager(paramss, schemeRegistry);
@@ -121,7 +124,6 @@ public class ServiceHandler {
         } catch (UnsupportedEncodingException | ClientProtocolException e) {
             e.printStackTrace();
         }
-
         return response;
 
     }

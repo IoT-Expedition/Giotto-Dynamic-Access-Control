@@ -32,14 +32,14 @@ public class AppSettings extends Activity {
         bdurl = (EditText) findViewById(R.id.bdurl);
         bdport = (EditText) findViewById(R.id.bdport);
 
-        bdurl.setText(pref.getString("bdurl", "https://cmu.buildingdepot.org"));
+        bdurl.setText(pref.getString("bdurl", "http://128.2.113.192"));
         bdport.setText(pref.getString("bdport", "82"));
 
         client_id = (EditText) findViewById(R.id.client_id);
         client_secret = (EditText) findViewById(R.id.client_secret);
 
-        client_id.setText(pref.getString("client_id", "WO5xB2VyEfsQQRz6hhxC8Mucq47x3rmUcwFIPDG9"));
-        client_secret.setText(pref.getString("client_secret", "B3FMqZhXVzTiPrJq6h3Da3YBCwxrpaDPnR4vldZqVnhlPNl9MY"));
+        client_id.setText(pref.getString("client_id", "wGHenvAdVOihyMQvsyo8GBVMolR2gtbhoD6jZ3Ah"));
+        client_secret.setText(pref.getString("client_secret", "vLlRZHLPfmYXdroefmpLLoTlho8rsUUgqSgWEFTz4gKPYStUNe"));
 
         bmac = (EditText) findViewById(R.id.bmac);
 

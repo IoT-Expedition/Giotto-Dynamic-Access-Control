@@ -30,7 +30,7 @@ public class AppSettings extends Activity {
         bdurl = (EditText) findViewById(R.id.bdurl);
         bdport = (EditText) findViewById(R.id.bdport);
 
-        bdurl.setText(pref.getString("bdurl", "https://cmu.buildingdepot.org"));
+        bdurl.setText(pref.getString("bdurl", "http://128.2.113.192"));
         bdport.setText(pref.getString("bdport", "82"));
 
         client_id = (EditText) findViewById(R.id.client_id);

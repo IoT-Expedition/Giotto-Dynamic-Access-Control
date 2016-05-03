@@ -12,12 +12,20 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.SingleClientConnManager;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 public class ServiceHandler {
@@ -62,7 +70,18 @@ public class ServiceHandler {
                                   List<NameValuePair> params) throws IOException {
         try {
             // http client
-            DefaultHttpClient httpClient = new DefaultHttpClient();
+//            DefaultHttpClient httpClient = new DefaultHttpClient();
+            SchemeRegistry schemeRegistry = new SchemeRegistry();
+            schemeRegistry.register(new Scheme("https",
+                    SSLSocketFactory.getSocketFactory(), 443));
+
+            schemeRegistry.register( new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+
+            HttpParams paramss = new BasicHttpParams();
+
+            SingleClientConnManager mgr = new SingleClientConnManager(paramss, schemeRegistry);
+
+            HttpClient httpClient = new DefaultHttpClient(mgr, paramss);
             HttpEntity httpEntity = null;
             HttpResponse httpResponse = null;
 

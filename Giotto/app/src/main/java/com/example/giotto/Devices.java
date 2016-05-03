@@ -219,7 +219,7 @@ public class Devices extends Activity implements AdapterView.OnItemSelectedListe
             String jsonStr = "finished";
             ServiceHandler sh = new ServiceHandler();
             if (flag == 0) {
-                Log.d("Post", "POSTING");
+                Log.d("Post", "POSTINGS");
 
                 String access_token = pref.getString("access_token", "access");
 

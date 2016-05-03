@@ -195,7 +195,9 @@ public class Scan extends Activity {
 //                                }
 
 //                                C8:39:57:6B:A8:57
-                                if (device.getAddress().equals(pref.getString("bmac","C4:75:30:66:78:79"))) {
+                                pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+                                String blemac = pref.getString("bmac","C4:75:30:66:78:79");
+                                if (device.getAddress().equals(blemac)) {
                                     locresponse = "Google";
                                     Intent getFromMain = getIntent();
                                     String uuid = getFromMain.getStringExtra("uuid");

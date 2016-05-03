@@ -18,6 +18,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class config {
 
+
     SharedPreferences pref;
 
     /*-----------------------------------------------------------------------------------------------------------*/
@@ -50,12 +51,12 @@ public class config {
         Context context = MainActivity.gettheContext();
         pref = context.getSharedPreferences("MyPref", 0);
 
-        bdurl = pref.getString("bdurl", "https://cmu.buildingdepot.org");
+        bdurl = pref.getString("bdurl", "http://128.2.113.192");
         port = pref.getString("bdport", "82");
         ip = bdurl + ":" + port;
 
-        client_id = pref.getString("client_id", "WO5xB2VyEfsQQRz6hhxC8Mucq47x3rmUcwFIPDG9");
-        client_secret = pref.getString("client_secret", "B3FMqZhXVzTiPrJq6h3Da3YBCwxrpaDPnR4vldZqVnhlPNl9MY");
+        client_id = pref.getString("client_id", "wGHenvAdVOihyMQvsyo8GBVMolR2gtbhoD6jZ3Ah");
+        client_secret = pref.getString("client_secret", "vLlRZHLPfmYXdroefmpLLoTlho8rsUUgqSgWEFTz4gKPYStUNe");
 
         url = ip + "/oauth/access_token/client_id="+client_id+"/client_secret="+client_secret;
         postAsync post = new postAsync();
