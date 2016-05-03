@@ -364,7 +364,7 @@ public class Dummy extends Activity {
     private void repeatAsync() {
         int length = mLeDeviceListAdapter.size();
         for (int i=0;i<length;i++) {
-            if (mLeDeviceListAdapter.get(i).getAddress().equals("C4:75:30:66:78:79"))
+            if (mLeDeviceListAdapter.get(i).getAddress().equals(pref.getString("bmac", "C4:75:30:66:78:79")))
                 flagForscan=1;
         }
         if(flagForscan == 1){

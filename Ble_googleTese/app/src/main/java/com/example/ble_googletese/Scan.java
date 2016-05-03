@@ -195,7 +195,7 @@ public class Scan extends Activity {
 //                                }
 
 //                                C8:39:57:6B:A8:57
-                                if (device.getAddress().equals(configuration.beacon_mac)) {
+                                if (device.getAddress().equals(pref.getString("bmac","C4:75:30:66:78:79"))) {
                                     locresponse = "Google";
                                     Intent getFromMain = getIntent();
                                     String uuid = getFromMain.getStringExtra("uuid");
