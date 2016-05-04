@@ -12,9 +12,9 @@ def Location():
 	# password : check
 # --------------------------------------------------------------------------------------------------------------------------------------------- # 
 	# Enter details here
-	ip = "http://bd-test.andrew.cmu.edu:82"
-	client_id = "GGvq5hFbofqkdugU8dxaFeKcCfkgU7Y9mZItSA1K" # Granter's client ID
-	client_secret = "F1oqYhv1jiSoOiLjoiHndjzCOrjzN5X8TnkDnrhvqZvNV2iomF" # Granter's client secret
+	ip = "http://128.2.113.192:82"
+	client_id = "GQLRaedrQHnlXDbsd8BIBdDchmdyBotuHfT7W0rt" # Granter's client ID
+	client_secret = "yXTE8ZfcGkfnWqkx4KqQKT365WXzNd51Mietf53m9wTkC2Az31" # Granter's client secret
 	nonadmin_email = "non-admin@non-admin.com"
 	admin_email = "admin@admin.com"
 # --------------------------------------------------------------------------------------------------------------------------------------------- #
@@ -31,7 +31,7 @@ def Location():
 
 	# Time series data fetch for locations of admin and non-admin
 	end_time = int(time.time())
-	start_time = int((datetime.now() - timedelta(days=2)).strftime("%s"))
+	start_time = int((datetime.now() - timedelta(days=20)).strftime("%s"))
 
 	# URL's for nonadmin and admin
 	nonadmin_url  = ip + "/api/sensor/6cf69555-a7f4-4fca-b655-b141752cc4f7/timeseries?start_time="+`start_time`+"&end_time="+`end_time`
