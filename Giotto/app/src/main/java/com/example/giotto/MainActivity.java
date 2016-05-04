@@ -138,7 +138,7 @@ public class MainActivity extends Activity{
 
     private String checkForCredentials() throws ExecutionException, InterruptedException, JSONException,
             IllegalArgumentException{
-        url =  ip + "/api/sensor/list?filter=metadata&Name="+configuration.email;
+        url =  ip + "/api/sensor/list?filter=metadata&Name="+pref.getString("user", "admin@admin.com");
         Log.d("ipof",url);
         postAsync post = new postAsync();
         userjson = post.execute().get();
