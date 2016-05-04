@@ -36,10 +36,6 @@ public class AppSettings extends Activity {
         client_id = (EditText) findViewById(R.id.client_id);
         client_secret = (EditText) findViewById(R.id.client_secret);
 
-        editor.putString("client_id", client_id.getText().toString());
-        editor.putString("client_secret", client_secret.getText().toString());
-        editor.apply();
-
         final Button finished = (Button) findViewById(R.id.finished);
 
         finished.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +43,9 @@ public class AppSettings extends Activity {
 
                 editor.putString("bdurl", bdurl.getText().toString());
                 editor.putString("bdport", bdport.getText().toString());
+
+                editor.putString("client_id", client_id.getText().toString());
+                editor.putString("client_secret", client_secret.getText().toString());
 
                 ip = bdurl.getText().toString().trim() + ":" + bdport.getText().toString().trim();
 
