@@ -68,6 +68,8 @@ public class MainActivity extends Activity{
         enter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                editor.putString("user", user_name.getText().toString());
+
                 try {
                     configuration.access_token = configuration.getToken();
                     editor.putString("access_token", configuration.access_token);
