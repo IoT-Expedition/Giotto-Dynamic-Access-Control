@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.giotto.config;
+
 public class AppSettings extends Activity {
 
     SharedPreferences pref;
@@ -35,6 +37,9 @@ public class AppSettings extends Activity {
 
         client_id = (EditText) findViewById(R.id.client_id);
         client_secret = (EditText) findViewById(R.id.client_secret);
+
+        client_id.setText(pref.getString("client_id", "wGHenvAdVOihyMQvsyo8GBVMolR2gtbhoD6jZ3Ah"));
+        client_secret.setText(pref.getString("client_secret", "vLlRZHLPfmYXdroefmpLLoTlho8rsUUgqSgWEFTz4gKPYStUNe"));
 
         final Button finished = (Button) findViewById(R.id.finished);
 

@@ -20,6 +20,7 @@ public class config {
 
 
     SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     /*-----------------------------------------------------------------------------------------------------------*/
     public String bdurl;
@@ -50,6 +51,10 @@ public class config {
 
         Context context = MainActivity.gettheContext();
         pref = context.getSharedPreferences("MyPref", 0);
+        editor = pref.edit();
+
+        editor.putString("user", email);
+        editor.apply();
 
         bdurl = pref.getString("bdurl", "http://128.2.113.192");
         port = pref.getString("bdport", "82");

@@ -50,7 +50,7 @@ public class MainActivity extends Activity{
         ip = pref.getString("ip","http://128.2.113.192:82");
 
         final EditText user_name = (EditText)  findViewById(R.id.user_name);
-        user_name.setText(configuration.email);
+        user_name.setText(pref.getString("user","admin@admin.com"));
 
         final EditText user_password = (EditText) findViewById(R.id.user_password);
         user_password.setText("*****");
@@ -60,6 +60,8 @@ public class MainActivity extends Activity{
 
         setting.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                editor.putString("user", user_name.getText().toString());
+                editor.apply();
                 Intent settingsIntent = new Intent(getApplicationContext(), AppSettings.class);
                 startActivity(settingsIntent);
             }
@@ -70,6 +72,8 @@ public class MainActivity extends Activity{
 
         enter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                editor.putString("user", user_name.getText().toString());
 
                 try {
                     configuration.access_token = configuration.getToken();
