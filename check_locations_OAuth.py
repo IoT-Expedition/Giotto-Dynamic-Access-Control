@@ -60,7 +60,7 @@ def Location():
 			requests.get(ip+"/api/permission_change/user="+nonadmin_email+"/sensor_group=GoogleSG/permission=rw")
 			# time.sleep(10)
 		else:
-			requests.get(ip+"/api/permission_change/"+nonadmin_email+"/sensor_group=GoogleSG/permission=dr")
+			requests.get(ip+"/api/permission_change/user="+nonadmin_email+"/sensor_group=GoogleSG/permission=dr")
 			print "Only test is available"
 
 def returnAvailability(location_json):
