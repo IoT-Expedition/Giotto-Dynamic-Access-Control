@@ -67,7 +67,7 @@ public class Devices extends Activity implements AdapterView.OnItemSelectedListe
         getActionBar().setTitle("Control");
 
         pref = getApplicationContext().getSharedPreferences("MyPref", 0);
-        ip = pref.getString("ip", "https://<URL here>");
+        ip = pref.getString("ip", "https://http://cmu.buildingdepot.org:82");
 
         listView = (ListView) findViewById(R.id.listView);
 
@@ -355,19 +355,6 @@ public class Devices extends Activity implements AdapterView.OnItemSelectedListe
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 if(parent.getItemAtPosition(position).equals("Controller")){
-                    // Actuate the module
-
-//                    Log.d("Here",we.getStatefunction());
-//                    if(toggleButton.isChecked()){
-//                        toggleButton.setText("ON");
-//                    }
-//                    else {
-//                        toggleButton.setText("OFF");
-//                    }
-//                    if(we.getStatefunction().equals("ON"))
-//                        toggleButton.setText(toggleButton.getTextOn());
-//                    else
-//                        toggleButton.setText(toggleButton.getTextOff());
 
                     toggleButton.setVisibility(View.VISIBLE);
                     if (toggleButton.getText().equals("ON")) toggleButton.toggle();
