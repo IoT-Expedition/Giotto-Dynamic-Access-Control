@@ -1,20 +1,44 @@
 <html>
 <body>
 
-<p>This is the guide to use the Dynamic Access Control Android Application. There are two Android Apps:</p>
+<h2><u>GIOTTO DYNAMIC ACCESS CONTROL DOCUMENTATION</u></h2>
+
+<p>This is the guide to use the Dynamic Access Control Android Application. We have built two Android Applications, which demonstrate the level of Access Control in Building Depot. Here we use two contexts:</p>
 
 <ol>
-	<li><strong>GIOTTO</strong> &ndash; Access data from anywhere</li><br>
-	<img src = "images/gs.png"> </img><br>
-	<li><strong>BLE_GOOGLETEST</strong> &ndash; App with use of BLE beacons for location</li><br>
-	<img src = "images/bs.png"> </img><br>
+	<li>Role of the client (ADMIN / NON-ADMIN)</li><br>
+	<li>Location of the client (vicinity to IoT space)</li><br>
 </ol>
 
-<p>To use this app, you should have installed and properly configured <a href = "http://www.buildingdepot.org/">Building Depot</a></p>
+<p>The two applications are: </p>
+
+<ol>
+	<li><strong>GIOTTO</strong></li>
+		<p>&emsp;&emsp;&emsp;GIOTTO uses static locations, ie. we can emulate locations in the App and check for sensor data in that location. For eg, if we have deployed sensors that are talking to BuildingDepot in a space that we call <strong>Google</strong>, in the app there is a dropdown that holds a list of locations. On selecting Google, we are able to view the sensors deployed in that location. So, to use this App it is not necessary that we are to be physically present in that location. </p> <br><br>
+
+		<div style="width:500 px">
+			<div style="float:left; width:100 px"><img src="images/g1.png"></img></div>
+			<div style="float:left; width:100 px"><img src="images/g2.png"></img></div>
+			<div style="float:left; width:100 px"><img src="images/g3.png"></img></div>
+			<div style="clear:both"></div>
+		</div> <br> <br><br><br>
+
+	<li><strong>BLE_GOOGLETEST</strong> </li>
+		<p>&emsp;&emsp;&emsp;The BLE_GOOGLETESE app, serves the same purpose as GIOTTO app. The only difference plays in physical location of the user. This app requires that the user be physically present at the location where the sensors have been deployed.</p> <br><br>
+
+		<div style="width:500 px">
+			<div style="float:left; width:100 px"><img src="images/b1.png"></img></div>
+			<div style="float:left; width:100 px"><img src="images/b2.png"></img></div>
+			<div style="float:left; width:100 px"><img src="images/b3.png"></img></div>
+			<div style="clear:both"></div>
+		</div> <br> <br>
+
+</ol>
+
+<p><strong>To use these applications, you should have installed and properly configured <a href = "http://cmu.buildingdepot.org/" target="_blank">Building Depot</a></strong></p>
 
 <ul type="square">
-	<li><strong><a href = "quickstart.html">Quickstart</a></strong></li>
-</ul>
+	<li><strong><a href = "quickstart.html">PLAYING WITH THE APPS</a></strong></li></ul>
 
 </body>
 </html>

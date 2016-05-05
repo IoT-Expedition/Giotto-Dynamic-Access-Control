@@ -1,0 +1,38 @@
+<html>
+<body>
+
+<h2><u>Giotto Application Documentaion</u></h2>
+
+<p>The working of the GIOTTO apk is explained in this documentation. The working is explained in steps as below:</p>
+
+<ol>
+	<li>All the necessary information like OAuth keys, user type's and email's are supplied through the config file. Also, each HTTP/HTTPS request to the BuildingDepot Server requires an OAuth Authorization header. Hence we generate an access_token using the OAuth client credentials supplied. We generate access_tokens in the <b>config.java</b> file, in the <b>getToken()</b> function</li><br>
+
+	<li>The <b>MainActivity</b> activity does the basic credential check. In BuildingDepot, the Location Sensor holds the user's credentials as <b>METADATA</b>. From the app, th credentials suppplied in the config file are verified with the metadata of user Location Sensor. The user could be Admin/ Non-Admin. Once authorized, it moves to the next page.</li><br>
+
+	<li>In the <b>Devices</b> Activity,the Location Dropdown is populated with the location provided </li>
+</ol>
+
+<p><a href="index.html">Back to Main Page</a></p>
+</body>
+</html>
+
+
+<p><u><strong>Configuring the APK&rsquo;s:</strong></u></p>
+<ol>
+	<li>Download the Giotto and Ble_Google_tese APK&rsquo;s from: <a href="https://github.com/IoT-Expedition/Giotto-Dynamic-Access-Control">https://github.com/IoT-Expedition/Giotto-Dynamic-Access-Control</a></li>
+	<li >Open them on Android Studio or Eclipse. Preferably Android Studio</li>
+	<li>Navigate to <strong>config.java </strong>file</li>
+	<li>Edit these fields:</li>
+
+<ol style="list-style-type:lower-alpha;">
+	<li><strong>ip </strong>&nbsp;- Give the URL on wich you have BuildingDepot installed (Please also specify the PORT of dataservice)</li>
+	<li><strong>location&nbsp; - </strong>Enter a location your sensors are in</li>
+	<li><strong>userType </strong>&ndash; On one phone, specify as ADMIN and NON-ADMIN on the other phone</li>
+	<li><strong>beacon_mac </strong>&ndash; Give your BLE beacon&rsquo;s MAC ID</li>
+</ol>
+
+<br><img src="images/config.png"></img><br><br>
+
+	<li value="5">Download both the APK&rsquo;s after the edits into both the phones, with one as ADMIN and the other as NON-ADMIN</li>
+</ol>
