@@ -47,7 +47,7 @@ public class MainActivity extends Activity{
         pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         editor = pref.edit();
 
-        ip = pref.getString("ip","http://128.2.113.192:82");
+        ip = pref.getString("ip","http://cmu.buildingdepot.org:82");
 
         final EditText user_name = (EditText)  findViewById(R.id.user_name);
         user_name.setText(pref.getString("user","admin@admin.com"));
