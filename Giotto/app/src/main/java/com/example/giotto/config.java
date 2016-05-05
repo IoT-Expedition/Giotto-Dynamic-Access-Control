@@ -37,16 +37,6 @@ public class config {
 
     public String getToken() throws ExecutionException, InterruptedException, JSONException {
 
-//        if(userType.equals("ADMIN")){
-//            client_id = "1XbteMQxvu6PhvWtgOpuByCXgvFVs5yUV98H7bEG";
-//            client_secret = "gOTTCNEzQR2ktlet3wDK26Pb5D5NZtbZdBoNao8p8ITqcLvjbN";
-//        }
-//
-//        else {
-//            client_id = "WO5xB2VyEfsQQRz6hhxC8Mucq47x3rmUcwFIPDG9";
-//            client_secret = "B3FMqZhXVzTiPrJq6h3Da3YBCwxrpaDPnR4vldZqVnhlPNl9MY";
-//        }
-
         Context context = MainActivity.gettheContext();
         pref = context.getSharedPreferences("MyPref", 0);
         editor = pref.edit();
@@ -54,7 +44,7 @@ public class config {
         editor.putString("user", email);
         editor.apply();
 
-        bdurl = pref.getString("bdurl", "http://128.2.113.192");
+        bdurl = pref.getString("bdurl", "http://cmu.buildingdepot.org");
         port = pref.getString("bdport", "82");
         ip = bdurl + ":" + port;
 
