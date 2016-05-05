@@ -12,9 +12,9 @@ def Location():
 	# password : check
 # --------------------------------------------------------------------------------------------------------------------------------------------- # 
 	# Enter details here
-	ip = "http://128.2.113.192:82"
-	client_id = "GQLRaedrQHnlXDbsd8BIBdDchmdyBotuHfT7W0rt" # Granter's client ID
-	client_secret = "yXTE8ZfcGkfnWqkx4KqQKT365WXzNd51Mietf53m9wTkC2Az31" # Granter's client secret
+	ip = "<URL of BuildingDepot goes here>"
+	client_id = "<Obtain from Web UI with credentials above for check>" # Granter's client ID
+	client_secret = "<Obtain from Web UI with credentials above for check>" # Granter's client secret
 	nonadmin_email = "non-admin@non-admin.com"
 	admin_email = "admin@admin.com"
 # --------------------------------------------------------------------------------------------------------------------------------------------- #
