@@ -56,7 +56,7 @@ public class config {
         editor.putString("user", email);
         editor.apply();
 
-        bdurl = pref.getString("bdurl", "http://128.2.113.192");
+        bdurl = pref.getString("bdurl", "http://cmu.buildingdepot.org");
         port = pref.getString("bdport", "82");
         ip = bdurl + ":" + port;
 
