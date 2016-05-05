@@ -26,7 +26,7 @@ public class sensorValues {
     public static String values(String sens_uuid, String username) throws ExecutionException, InterruptedException, JSONException {
         Context context = MainActivity.gettheContext();
         pref = context.getSharedPreferences("MyPref", 0);
-        String ip = pref.getString("ip", "https://<URL here>");
+        String ip = pref.getString("ip", "http://cmu.buildingdepot.org");
         postAsync process = new postAsync();
 
         Calendar cal  = Calendar.getInstance();
