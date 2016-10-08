@@ -25,7 +25,7 @@ public class config {
     public String bdurl;
     public String port;
     public String location = "Google";// Specify the location you are in
-    public String userType = "ADMIN"; // SPECIFY IF USER IS AN ADMIN / NON-ADMIN
+    public String userType = "NON-ADMIN"; // SPECIFY IF USER IS AN ADMIN / NON-ADMIN
     public String email = choose(userType); // Enter UserType's Email
     public String password = "dummy"; // Leave this field as is
     public String client_id;
@@ -54,12 +54,12 @@ public class config {
         editor.putString("user", email);
         editor.apply();
 
-        bdurl = pref.getString("bdurl", "http://128.2.113.192");
-        port = pref.getString("bdport", "82");
+        bdurl = pref.getString("bdurl", "http://bd-exp.andrew.cmu.edu");
+        port = pref.getString("bdport", "81");
         ip = bdurl + ":" + port;
 
-        client_id = pref.getString("client_id", "ym6avO3xDycO9AWTHc5oXQYKgNlXVAiIyhx6A0fE");
-        client_secret = pref.getString("client_secret", "BJvVm9ENDbBSKmp9mKQl2rGBYRhFCc95CCubBE62TabiNnjLIk");
+        client_id = pref.getString("client_id", "pn6UgthGOzCiMObzOxK2yuZhbFVccCeqKOvrLvpl");
+        client_secret = pref.getString("client_secret", "UIRUrNQDYRe8mFsdnpuzBJfxLfLFMh8HdDDWZQXHwTBiXfTfup");
 
         url = ip + "/oauth/access_token/client_id="+client_id+"/client_secret="+client_secret;
         postAsync post = new postAsync();

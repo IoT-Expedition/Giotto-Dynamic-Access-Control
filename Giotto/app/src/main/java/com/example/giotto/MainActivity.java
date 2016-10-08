@@ -2,6 +2,7 @@ package com.example.giotto;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Entity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.audiofx.BassBoost;
@@ -14,11 +15,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,6 +45,8 @@ public class MainActivity extends Activity{
     SharedPreferences.Editor editor;
     public static Context contextOfApplication;
 
+    public static DefaultHttpClient httpClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +57,10 @@ public class MainActivity extends Activity{
         pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         editor = pref.edit();
 
-        ip = pref.getString("ip","http://128.2.113.192:82");
+        ip = pref.getString("ip","http://bd-exp.andrew.cmu.edu:82");
 
         final EditText user_name = (EditText)  findViewById(R.id.user_name);
-        user_name.setText(pref.getString("user","admin@admin.com"));
+        user_name.setText(pref.getString("user","non-admin@non-admin.com"));
 
         final EditText user_password = (EditText) findViewById(R.id.user_password);
         user_password.setText("*****");
@@ -119,9 +129,8 @@ public class MainActivity extends Activity{
                     startActivity(devices);
                 }
                 else{
-                    user_password.setText("");
-                    user_name.setText("");
-                    username = userpwd = "";
+                    user_password.setText("dummy");
+                    userpwd = "dummy";
                     Toast.makeText(getApplicationContext(), "INVALID CREDENTIALS",
                             Toast.LENGTH_SHORT).show();}
 
@@ -138,8 +147,7 @@ public class MainActivity extends Activity{
 
     private String checkForCredentials() throws ExecutionException, InterruptedException, JSONException,
             IllegalArgumentException{
-        url =  ip + "/api/sensor/list?filter=metadata&Name="+configuration.email;
-        Log.d("ipof",url);
+        url = ip +":81" + "/api/search";
         postAsync post = new postAsync();
         userjson = post.execute().get();
         Log.d("user",String.valueOf(userjson));
@@ -154,13 +162,15 @@ public class MainActivity extends Activity{
         }
         else {
             JSONObject jsonObj = new JSONObject(userjson);
-            JSONArray sensor = jsonObj.getJSONArray("data");
+            JSONArray sensor = jsonObj.getJSONArray("result");
             JSONObject getMeta = sensor.getJSONObject(0);
-            sens_type = getMeta.getJSONObject("metadata").getString("Name");;
+            JSONArray getTags = getMeta.getJSONArray("tags");
+
+            sens_type = getTags.getJSONObject(0).getString("value");
 
 //            Getting UUID of Location sensor
             uuid = getMeta.getString("name");
-            Log.d("there", uuid);
+            Log.d("there", sens_type+uuid);
 
         }
 
@@ -179,13 +189,33 @@ public class MainActivity extends Activity{
         @Override
         protected String doInBackground(Void... params) {
             String jsonStr = "finished";
-            ServiceHandler sh = new ServiceHandler();
             // Making a request to BD for data and getting response as a String
+            httpClient = new DefaultHttpClient();
+            HttpPost postRequest = new HttpPost(url);
+
+            postRequest.addHeader("Authorization", "Bearer "+configuration.access_token);
+            postRequest.addHeader("content-type", "application/json");
+            postRequest.addHeader("charset", "utf-8");
+            String datatopost = "{\"data\":{\"Tags\":[\"user:"+username+"\"]}}";
+            StringEntity input = null;
             try {
-                jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
+                input = new StringEntity(datatopost);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            input.setContentType("application/json");
+            postRequest.setEntity(input);
+            HttpResponse response = null;
+            HttpEntity httpEntity;
+            try {
+                response = httpClient.execute(postRequest);
+                httpEntity = response.getEntity();
+                jsonStr = EntityUtils.toString(httpEntity);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            httpClient.getConnectionManager().shutdown();
             return jsonStr;
         }
 

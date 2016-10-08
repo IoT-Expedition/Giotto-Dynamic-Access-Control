@@ -26,7 +26,7 @@ public class sensorValues {
     public static String values(String sens_uuid, String username) throws ExecutionException, InterruptedException, JSONException {
         Context context = MainActivity.gettheContext();
         pref = context.getSharedPreferences("MyPref", 0);
-        String ip = pref.getString("ip", "http://128.2.113.192:82");
+        String ip = pref.getString("ip", "https://cmu.buildingdepot.org:82");
         postAsync process = new postAsync();
 
         Calendar cal  = Calendar.getInstance();
@@ -35,9 +35,9 @@ public class sensorValues {
         long start_time = cal.getTimeInMillis()/1000L;
         long end_time = System.currentTimeMillis() / 1000L;
 
-        url = ip + "/api/sensor/"+sens_uuid+"/timeseries?start_time="+start_time+"&end_time="+end_time;
+        url = ip + ":82"+ "/api/sensor/"+sens_uuid+"/timeseries?start_time="+start_time+"&end_time="+end_time;
         String value_fetch = process.execute().get();
-        Log.d("fer", value_fetch);
+        Log.d("fer", url);
 
         JSONObject val_json = new JSONObject(value_fetch);
 
