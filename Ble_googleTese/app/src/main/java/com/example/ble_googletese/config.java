@@ -39,16 +39,6 @@ public class config {
 
     public String getToken() throws ExecutionException, InterruptedException, JSONException {
 
-//        if(userType.equals("ADMIN")){
-//            client_id = "1XbteMQxvu6PhvWtgOpuByCXgvFVs5yUV98H7bEG";
-//            client_secret = "gOTTCNEzQR2ktlet3wDK26Pb5D5NZtbZdBoNao8p8ITqcLvjbN";
-//        }
-//
-//        else {
-//            client_id = "WO5xB2VyEfsQQRz6hhxC8Mucq47x3rmUcwFIPDG9";
-//            client_secret = "B3FMqZhXVzTiPrJq6h3Da3YBCwxrpaDPnR4vldZqVnhlPNl9MY";
-//        }
-
         Context context = MainActivity.gettheContext();
         pref = context.getSharedPreferences("MyPref", 0);
         editor = pref.edit();
@@ -56,12 +46,12 @@ public class config {
         editor.putString("user", email);
         editor.apply();
 
-        bdurl = pref.getString("bdurl", "http://128.2.113.192");
+        bdurl = pref.getString("bdurl", "http://google-demo.andrew.cmu.edu");
         port = pref.getString("bdport", "82");
         ip = bdurl + ":" + port;
 
-        client_id = pref.getString("client_id", "wGHenvAdVOihyMQvsyo8GBVMolR2gtbhoD6jZ3Ah");
-        client_secret = pref.getString("client_secret", "vLlRZHLPfmYXdroefmpLLoTlho8rsUUgqSgWEFTz4gKPYStUNe");
+        client_id = pref.getString("client_id", "iTK3khxcNoep9E3i9zf1nzxYIVFmaxiQiSebr8oM");
+        client_secret = pref.getString("client_secret", "a2Urb3iGSViurlSCeJFxF0uNmh1Il29ZAfkxntjHc6qVs4sHdX");
 
         url = ip + "/oauth/access_token/client_id="+client_id+"/client_secret="+client_secret;
         postAsync post = new postAsync();

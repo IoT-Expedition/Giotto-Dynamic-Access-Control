@@ -22,10 +22,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -86,11 +88,9 @@ public class Dummy extends Activity {
 
     public void save() throws IOException, ExecutionException, InterruptedException, JSONException {
         long unixTime = System.currentTimeMillis() / 1000L;
-
-//        datatopost = "[{\"sensor_id\":\""+uuid+"\",\"samples\":[{\"value\":\""+availability+"\",\"time\":"+unixTime+"}]}]";
         datatopost = "[{\"sensor_id\":\""+uuid+"\",\"samples\":[{\"value\":\""+availability+"\",\"time\":"+unixTime+"}]}]";
         Log.d("idhere",datatopost);
-        url = ip + "/api/sensor/timeseries";
+        url = ip +":82"+ "/api/sensor/timeseries";
         post();
     }
 
@@ -98,6 +98,7 @@ public class Dummy extends Activity {
         if(destroyFlag==1) flag = 0;
         //Async Task Starts here
         postAsync p = new postAsync();
+        Log.d("execute",uuid);
         String t = String.valueOf(p.execute().get());
 //        Log.d("After Execute", t);
         if (destroyFlag == 0) {
@@ -115,17 +116,15 @@ public class Dummy extends Activity {
         @Override
         protected String doInBackground(Void... params) {
             String jsonStr = "finished";
-            ServiceHandler sh = new ServiceHandler();
             if (flag == 0) {
-                Log.d("Post", "POSTING");
+                Log.d("Post", "POSTINGS");
 
-                pref = getApplicationContext().getSharedPreferences("MyPref", 0);
-                String access_token = pref.getString("access_token", null);
+                String access_token = pref.getString("access_token", "access");
 
                 httpClient = new DefaultHttpClient();
                 HttpPost postRequest = new HttpPost(url);
 
-                postRequest.addHeader("Authorization", "Bearer " + access_token);
+                postRequest.addHeader("Authorization", "Bearer "+access_token);
                 postRequest.addHeader("content-type", "application/json");
                 postRequest.addHeader("charset", "utf-8");
 
@@ -144,15 +143,36 @@ public class Dummy extends Activity {
                     e.printStackTrace();
                 }
                 httpClient.getConnectionManager().shutdown();
-                Log.d("Location","posted");
             } else {
                 flag = 0;
                 // Making a request to BD for data and getting sensorList response as a String
+                httpClient = new DefaultHttpClient();
+                HttpPost postRequest = new HttpPost(url);
+                String access_token = pref.getString("access_token", "access");
+
+                postRequest.addHeader("Authorization", "Bearer "+access_token);
+                postRequest.addHeader("content-type", "application/json");
+                postRequest.addHeader("charset", "utf-8");
+                String datatopost = "{\"data\":{\"Tags\":[\"Giotto_dac:Sensor Tag\"]}}";
+                StringEntity input = null;
                 try {
-                    jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
+                    input = new StringEntity(datatopost);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                input.setContentType("application/json");
+                postRequest.setEntity(input);
+                HttpResponse response = null;
+                HttpEntity httpEntity;
+                try {
+                    response = httpClient.execute(postRequest);
+                    httpEntity = response.getEntity();
+                    jsonStr = EntityUtils.toString(httpEntity);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                httpClient.getConnectionManager().shutdown();
             }
             return jsonStr;
         }
@@ -212,37 +232,38 @@ public class Dummy extends Activity {
 
         postAsync process = new postAsync();
         flag = 1;
-        url = ip + "/api/sensor/list?filter=tags&Giotto_dac=Sensor%20Tag";
+        url = ip +":81" + "/api/search";
         String sensor_list = process.execute().get();
 
         // Find number of Objects in data
         JSONObject jsonObj = new JSONObject(sensor_list);
-        JSONArray sensor = jsonObj.getJSONArray("data");
+        JSONArray sensor = jsonObj.getJSONArray("result");
         int len = sensor.length();
 
         for (int i = 1; i <= len; i++) {
 
             JSONObject getMeta = sensor.getJSONObject(0);
-            String sens_type = getMeta.getJSONObject("metadata").getString("Type");
+            String sens_type = getMeta.getJSONArray("tags").getJSONObject(1).getString("value");
             String sens_uuid = getMeta.getString("name");
+            Log.d("swing", sens_type+"  "+ sens_uuid);
 
             String value_sensor = sensorValues.values(sens_uuid, username);
 
             // Put the sensors into the array list
             if(!(value_sensor.equals("none"))) {
                 sensors.add(sens_type + "\n" + value_sensor);
-                actuatorFlag = 1;
             }
             else {
                 sensors.add("You are not authenticated yet to view this List");
             }
-        }
-        if(actuatorFlag ==1){
-            sensors.add("Connect to a Wemo");
-            actuatorFlag = 0;
+//        }
+//        if(actuatorFlag ==1){
+//            sensors.add("Actuator1");
+//            actuatorFlag = 0;
         }
         listcreate();
     }
+
 
     private void makelistenToList(){
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
